@@ -66,9 +66,9 @@ suite('Functional Tests', function() {
          .post('/api/books')
          .send({})
          .end((err, res) => {
-          assert.deepEqual(res.body, {
-            error: 'missing required field title'
-          })
+          assert.deepEqual(res.body, 
+            'missing required field title'
+          )
          })
         done();
       });
@@ -98,9 +98,9 @@ suite('Functional Tests', function() {
         .keepOpen()
          .get('/api/books/1234')
          .end((err, res) => {
-          assert.deepEqual(res.body, {
-            error: 'no book exists'
-          })
+          assert.deepEqual(res.body,
+            'no book exists'
+          )
          })
         done();
       });
@@ -145,9 +145,9 @@ suite('Functional Tests', function() {
          .post(id_request)
          .send({})
          .end((err, res) => {
-          assert.deepEqual(res.body, {
-            error: 'missing required field comment'
-          })
+          assert.deepEqual(res.body,
+            'missing required field comment'
+          )
          })
         done();
       });
@@ -158,9 +158,9 @@ suite('Functional Tests', function() {
          .post('/api/books/1234')
          .send({comment: 'i like boby'})
          .end((err, res) => {
-          assert.deepEqual(res.body, {
-            error: 'no book exists'
-          })
+          assert.deepEqual(res.body,
+            'no book exists'
+          )
          })
         done();
       });
@@ -174,9 +174,9 @@ suite('Functional Tests', function() {
          .keepOpen()
          .delete(id_request)
          .end((err, res) => {
-          assert.deepEqual(res.body, {
-            success: 'delete successful'
-          })
+          assert.deepEqual(res.body,
+            'delete successful'
+          )
          })
         done();
       });
@@ -186,9 +186,9 @@ suite('Functional Tests', function() {
          .keepOpen()
          .delete('/api/books/1234')
          .end((err, res) => {
-          assert.deepEqual(res.body, {
-            error: 'no book exists'
-          })
+          assert.deepEqual(res.body,
+            'no book exists'
+          )
          })
         done();
       });

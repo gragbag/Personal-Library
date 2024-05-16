@@ -38,9 +38,7 @@ module.exports = function (app) {
       let title = req.body.title;
 
       if (!title) {
-        return res.send({
-          error: 'missing required field title'
-        })
+        return res.send('missing required field title')
       };
 
       const newBook = new Book({
@@ -61,13 +59,9 @@ module.exports = function (app) {
     
     .delete(async function(req, res){
 
-      const deletedCount = await Book.deleteMany({});
+      await Book.deleteMany({});
 
-      if (!deletedCount) {
-        return res.send({error: 'nothing to delete'});
-      }
-
-      res.send({success: 'complete delete successful'});
+      res.send('complete delete successful');
       //if successful response will be 'complete delete successful'
     });
 
@@ -78,13 +72,13 @@ module.exports = function (app) {
       let bookid = req.params.id;
 
       if (!ObjectId.isValid(bookid)) {
-        return res.send({error: 'no book exists'});
+        return res.send('no book exists');
       }
 
       const bookData = await Book.findById(bookid, {commentcount: 0, __v: 0});
 
       if (!bookData) {
-        return res.send({error: 'no book exists'});
+        return res.send('no book exists');
       }
 
       res.send(bookData);
@@ -96,17 +90,17 @@ module.exports = function (app) {
       let comment = req.body.comment;
 
       if (!comment) {
-        return res.send({error: 'missing required field'});
+        return res.send('missing required field comment');
       }
 
       if (!ObjectId.isValid(bookid)) {
-        return res.send({error: 'no book exists'});
+        return res.send('no book exists');
       }
 
       const bookData = await Book.findByIdAndUpdate(bookid, {$push: {comments: comment}, $inc: {commentcount: 1}});
 
       if (!bookData) {
-        return res.send({error: 'no book exists'});
+        return res.send('no book exists');
       }
 
       const updatedBook = await Book.findById(bookid, {__v: 0, commentcount: 0});
@@ -121,15 +115,15 @@ module.exports = function (app) {
       let bookid = req.params.id;
 
       if (!ObjectId.isValid(bookid)) {
-        return res.send({error: 'no book exists'});
+        return res.send('no book exists');
       }
 
       const deletedBook = await Book.findByIdAndDelete(bookid);
       if (!deletedBook) {
-        return res.send({error: 'no book exists'});
+        return res.send('no book exists');
       }
 
-      res.send({success: 'delete successful'});
+      res.send('delete successful');
       //if successful response will be 'delete successful'
     });
   
